@@ -14,9 +14,11 @@ db.init_app(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'  
 app.config['MAIL_PORT'] = 587                  
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'okitodo0212@gmail.com'
-app.config['MAIL_PASSWORD'] = 'hord okux wuop cwzt'
-app.config['MAIL_DEFAULT_SENDER'] = 'okitodo0212@gmail.com'
+
+#hogeに自分のGmailのアドレス、atを@に変える、パスワードについても設定する。
+app.config['MAIL_USERNAME'] = 'hogehoge at gmail.com'
+app.config['MAIL_PASSWORD'] = 'hogehoge'
+app.config['MAIL_DEFAULT_SENDER'] = 'hogehoge at gmail.com'
 
 mail = Mail(app)
 
