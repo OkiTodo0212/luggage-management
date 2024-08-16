@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荷物の追加</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_luggage.css') }}">
+</head>
+<body>
+    <h1>荷物を追加する</h1>
+    <form action="{{ url_for('add_luggage',id=id) }}" method="POST">
+        <label for="luggage_quantity">荷物の数量:</label>
+        <input type="number" id="luggage_quantity" name="luggage_quantity" min="0">
+        <br><br>
+
+        <label for="mail_quantity">郵便の数量:</label>
+        <input type="number" id="mail_quantity" name="mail_quantity" min="0">
+        <br><br>
+
+        <label for="remarks">備考:</label>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+        <br><br>
+
+        <button type="submit">追加する</button>
+    </form>
+</body>
+</html>
+

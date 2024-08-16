@@ -1,0 +1,6 @@
+# 仮想環境のフォルダ
+venv/
+
+# Pythonの一時ファイル
+__pycache__/
+*.py[cod]

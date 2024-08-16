@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luggage Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<nav>
+    <ul>
+      <li><a href="/registration">新規登録</a></li>
+    </ul>
+</nav>
+
+<body>
+    <h1>荷物一覧</h1>
+    <form action="/search" method="post">
+        <input type="text" name="query" placeholder="部屋番号、名前...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Search Results</h2>
+        <ul class="searched">
+        {% for person in results %}
+            <li class="searched">
+                　　{{ person.dormitory }} {{ person.room_number }}号室   {{ person.last_name }} {{ person.first_name }} 
+                <div>
+                荷物：{{ person.luggage_all }} 件　郵便：{{ person.mail_all }}件　
+                </div>
+                <div class="menu">
+                <a href="{{ url_for('add_luggage',id=person.id) }}">追加</a>
+                <a href="{{ url_for('receive_luggage',id=person.id) }}">受取</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% elif request.method == 'POST' %}
+        <p>No results found.</p>
+    {% else %}
+    <ul class="searched">
+        {% for person in people %}
+            <li class="searched">
+                　　{{ person.dormitory }} {{ person.room_number }}号室   {{ person.last_name }} {{ person.first_name }} 
+                <div class="quantity">
+                荷物：{{ person.luggage_all }} 件　郵便：{{ person.mail_all }}件　
+                </div>
+                <div class="menu">
+                <a href="{{ url_for('add_luggage',id=person.id) }}">追加</a>
+                <a href="{{ url_for('receive_luggage',id=person.id) }}">受取</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

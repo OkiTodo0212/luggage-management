@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荷物の受け取り</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='receive_luggage.css') }}">
+</head>
+
+<body>
+    <h1>荷物を受け取る</h1>
+    {% if luggages_not_received %}
+    <button id="select-all">全て選択</button>
+    <button id="deselect-all">選択解除</button>
+    <form action="{{ url_for('receive_luggage',id=id) }}" method="POST">
+        <ul>
+        {% for luggage in luggages_not_received %}
+            <li>
+                <input type="checkbox"  name="luggage_ids" value={{luggage.id}}  class="checkbox-item">
+                配達日時：{{ luggage.time_add.strftime('%Y-%m-%d %H:%M') }} 　荷物：{{ luggage.luggage_quantity }}件 　 郵便：{{ luggage.mail_quantity }}件 　備考：{{ luggage.remarks }} 
+            </li>
+        {% endfor %}
+        </ul>
+        <button type="submit">受け取り済みにする</button>
+    </form>
+
+    {% else %}
+    <h2>荷物・郵便は届いていません</h2>
+    {% endif %}
+
+    <button onclick="showArchives()">履歴の表示/非表示</button>
+    <button onclick="redirectToIndex()">確認</button>
+    <ul id="displayArchives">
+        {% for luggage in luggages_received %}
+            <li>
+                配達日時：{{ luggage.time_add.strftime('%Y-%m-%d %H:%M') }} 　受取日時：{{ luggage.time_receive.strftime('%Y-%m-%d %H:%M') }}　荷物：{{ luggage.luggage_quantity }}件 　 郵便：{{ luggage.mail_quantity }}件 　備考：{{ luggage.remarks }} 
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+    <script>
+        // チェックボックスをすべて選択
+        document.getElementById('select-all').addEventListener('click', function() {
+            const checkboxes = document.querySelectorAll('.checkbox-item');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+            });
+        });
+    
+        // チェックボックスの選択を解除
+        document.getElementById('deselect-all').addEventListener('click', function() {
+            const checkboxes = document.querySelectorAll('.checkbox-item');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+        });
+
+        function showArchives() {
+            var list = document.getElementById("displayArchives");
+            var currentDisplay = window.getComputedStyle(list).display;
+            if (currentDisplay === "none") {
+                list.style.display = "block"; // リストを表示
+            } else {
+                list.style.display = "none"; // リストを非表示
+            }
+        }
+
+        function redirectToIndex() {
+            window.location.href = "{{ url_for('index') }}";
+        }
+        
+    </script>
+    
+    </script>
+</body>
+</html>

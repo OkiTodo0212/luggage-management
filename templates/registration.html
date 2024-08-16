@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registration.css') }}">
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>新規登録</h1>
+        <form method="POST">
+            <label for="dormitory">寮:</label>
+            <select id="dormitory" name="dormitory">
+                <option value=null selected disabled>選択してください</option>
+                <option value="〇〇寮">〇〇寮</option>
+                <option value="△△寮">△△寮</option>
+            </select>
+
+            <label for="room_number">部屋番号:</label>
+            <input type="number" id="room_number" name="room_number" required>
+
+            <label for="last_name">姓:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="first_name">名:</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="furigana">ふりがな:</label>
+            <input type="text" id="furigana" name="furigana" required>
+
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">登録</button>
+        </form>
+    </div>
+</body>
+</html>
